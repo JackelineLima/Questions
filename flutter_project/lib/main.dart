@@ -2,52 +2,55 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/responseButton.dart';
 import './questions.dart';
 
-main() => runApp(PerguntasApp());
+main() => runApp(const QuestionsApp());
 
-class _PerguntasAppState extends State<PerguntasApp> {
-  var _perguntaSelecionada = 0;
-  List<Widget> response = [];
+class _QuestionsStateApp extends State<QuestionsApp> {
+  var _questionsSelect = 0;
 
   void _response() {
     setState(() {
-      _perguntaSelecionada++;
+      _questionsSelect++;
     });
   }
 
-  final List<Map<String, Object>> perguntas = [
-    {
-      "text": "Qual é a sua cor favorita?",
-      "response": ["Preto", "Vermelho", "Verde", "Branco"]
-    },
-    {
-      "text": "Qual é o seu animal favorito?",
-      "response": ["Coelho", "Cobra", "Elefante", "Leão"]
-    },
-    {
-      "text": "Qual a sua linguagem favorita?",
-      "response": ["Swift", "Android", "Dart", "React Native"]
-    }
-  ];
-
   @override
   Widget build(BuildContext context) {
-    for (String textResponse
-        in perguntas[_perguntaSelecionada].cast()["response"]) {
-      response.add(ResponseButton(textResponse, _response));
-    }
+    final List<Map<String, Object>> questions = [
+      {
+        "text": "Qual é a sua cor favorita?",
+        "response": ["Preto", "Vermelho", "Verde", "Branco"]
+      },
+      {
+        "text": "Qual é o seu animal favorito?",
+        "response": ["Coelho", "Cobra", "Elefante", "Leão"]
+      },
+      {
+        "text": "Qual a sua linguagem favorita?",
+        "response": ["Swift", "Android", "Dart", "React Native"]
+      }
+    ];
+
+    List<String> response = questions[_questionsSelect].cast()["response"];
+    List<Widget> widgets =
+        response.map((t) => ResponseButton(t, _response)).toList();
+
+    // for (String textResponse
+    //     in questions[_questionsSelect].cast()["response"]) {
+    //   widgets.add(ResponseButton(textResponse, _response));
+    // }
 
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Questions"),
+          title: const Text("Questions"),
         ),
         body: Column(
           children: [
             Questions(
-              //perguntas é um MAP
-              perguntas[_perguntaSelecionada]["text"].toString(),
+              //questions é um MAP
+              questions[_questionsSelect]["text"].toString(),
             ),
-            ...response,
+            ...widgets,
           ],
         ),
       ),
@@ -55,9 +58,11 @@ class _PerguntasAppState extends State<PerguntasApp> {
   }
 }
 
-class PerguntasApp extends StatefulWidget {
+class QuestionsApp extends StatefulWidget {
+  const QuestionsApp({super.key});
+
   @override
-  _PerguntasAppState createState() {
-    return _PerguntasAppState();
+  _QuestionsStateApp createState() {
+    return _QuestionsStateApp();
   }
 }
