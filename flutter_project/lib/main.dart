@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/responseButton.dart';
 import './questions.dart';
 
 main() => runApp(PerguntasApp());
@@ -23,16 +24,14 @@ class _PerguntasAppState extends State<PerguntasApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Questions("Questions"),
+          title: Text("Questions"),
         ),
         body: Column(
           children: [
             Questions(perguntas[_perguntaSelecionada]),
-            ElevatedButton(
-                onPressed: _response, child: Questions("Resposta 1")),
-            ElevatedButton(
-                onPressed: _response, child: Questions("Resposta 2")),
-            ElevatedButton(onPressed: _response, child: Questions("Resposta 3"))
+            ResponseButton("Resposta 1", _response),
+            ResponseButton("Resposta 2", _response),
+            ResponseButton('Resposta 3', _response)
           ],
         ),
       ),
