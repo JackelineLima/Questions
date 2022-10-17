@@ -6,18 +6,34 @@ main() => runApp(const QuestionsApp());
 
 class _QuestionsStateApp extends State<QuestionsApp> {
   var _questionsSelect = 0;
+
   final List<Map<String, Object>> _questions = const [
     {
       "text": "Qual é a sua cor favorita?",
-      "response": ["Preto", "Vermelho", "Verde", "Branco"]
+      "response": [
+        {"text": "Preto", "note": 10},
+        {"text": "Vermelho", "note": 9},
+        {"text": "Verde", "note": 8},
+        {"text": "Branco", "note": 6},
+      ]
     },
     {
       "text": "Qual é o seu animal favorito?",
-      "response": ["Coelho", "Cobra", "Elefante", "Leão"]
+      "response": [
+        {"text": "Coelho", "note": 10},
+        {"text": "Cobra", "note": 5},
+        {"text": "Elefante", "note": 3},
+        {"text": "Leão", "note": 9},
+      ]
     },
     {
       "text": "Qual a sua linguagem favorita?",
-      "response": ["Swift", "Android", "Dart", "React Native"]
+      "response": [
+        {"text": "Swift", "note": 10},
+        {"text": "Android", "note": 8},
+        {"text": "Dart", "note": 7},
+        {"text": "React Native", "note": 5},
+      ]
     }
   ];
 
