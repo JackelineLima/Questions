@@ -1,17 +1,45 @@
 import 'package:flutter/material.dart';
 
 class Result extends StatelessWidget {
-  String text;
+  final int score;
+  final void Function() restart;
 
-  Result(this.text);
+  Result(this.score, this.restart);
+
+  String get phraseResult {
+    if (score <= 25) {
+      return "Parabéns!!";
+    } else if (score >= 35) {
+      return "Você é bom!!!";
+    } else {
+      return "Nivel Jedi";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        text,
-        style: TextStyle(fontSize: 28),
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Center(
+          child: Text(
+            phraseResult,
+            style: TextStyle(fontSize: 28),
+          ),
+        ),
+        TextButton(
+          onPressed: restart,
+          child: const Text(
+            "Reiniciar",
+          ),
+          style: TextButton.styleFrom(
+            textStyle: TextStyle(
+              fontSize: 20,
+              color: Colors.blue,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

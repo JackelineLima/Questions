@@ -6,6 +6,7 @@ main() => runApp(const QuestionsApp());
 
 class _QuestionsStateApp extends State<QuestionsApp> {
   var _questionsSelect = 0;
+  var _totalScore = 0;
 
   final List<Map<String, Object>> _questions = const [
     {
@@ -37,12 +38,21 @@ class _QuestionsStateApp extends State<QuestionsApp> {
     }
   ];
 
-  void _response() {
+  void _response(int score) {
     if (selectQuestion) {
       setState(() {
         _questionsSelect++;
+        _totalScore += score;
       });
     }
+    print(_totalScore);
+  }
+
+  void _restar() {
+    setState(() {
+      _questionsSelect = 0;
+      _totalScore = 0;
+    });
   }
 
   bool get selectQuestion {
@@ -53,17 +63,18 @@ class _QuestionsStateApp extends State<QuestionsApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          appBar: AppBar(
-            title: const Text("Questions"),
-          ),
-          body: selectQuestion
-              ? Quiz(
-                  questions: _questions,
-                  questionsSelect: _questionsSelect,
-                  answer: _response,
-                  selectQuestion: selectQuestion,
-                )
-              : Result("Parabéns!!!!!!")),
+        appBar: AppBar(
+          title: const Text("Questions"),
+        ),
+        body: selectQuestion
+            ? Quiz(
+                questions: _questions,
+                questionsSelect: _questionsSelect,
+                answer: _response,
+                selectQuestion: selectQuestion,
+              )
+            : Result(_totalScore, _restar),
+      ),
     );
   }
 }
